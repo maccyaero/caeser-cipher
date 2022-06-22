@@ -4,40 +4,19 @@ from operator import ne
 
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 UserInput = input("Type encode to encrpyt, decode to decrypt\n").lower()
-text = input("Type in the word to encode \n")
+text = input("Type in the word. \n")
 text = list(text.lower())
 cipher=int(input("Type in cypher number\n"))
-    
-def encode ():
-    global text
-    global cipher
-    for letter in text:
-        index = alphabet.index(letter)
-        # print(index)
-        userindex = text.index(letter)
-        # print(userindex)
-        newindex = index+cipher
-        # print(newindex)
-        newletter = alphabet[newindex]
-        text[userindex] = newletter
 
-def decode():
-    global text
-    global cipher
-    for letter in text:
+def caeser(start_text, shift_amount, cipher_direction):
+    end_text=""
+    if(cipher_direction=="decode"):
+            shift_amount=shift_amount*-1
+    for letter in start_text:
         index = alphabet.index(letter)
-        # print(index)
-        userindex = text.index(letter)
-        if(index>cipher):
-            newindex = index-cipher
-            newletter = alphabet[newindex]
-        else:
-            newindex = cipher-index
-            newletter = alphabet[newindex]
-        text[userindex] = newletter
+        newindex=index+shift_amount
+        end_text=end_text+alphabet[newindex]
+    return end_text
 
-if (UserInput=="encode"):
-    encode()
-if (UserInput=="decode"):
-    decode()
-print(text)
+
+print(caeser(text,cipher,UserInput))
